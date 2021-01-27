@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport">
+  <title>Linkedlist</title>
+</head>
+<body style="background-image:url('img6.jpg');background-size: 100%100%"><center>
+<h1 style="font-family:Arial, Helvetica, sans-serif;color:azure">Linked List Simulation</h1>
+<input type="text" id="element" placeholder="Enter the element" height=/><br><br>
+<button type="submit" style="background-color:mistyrose" value="Add element to linkedlist" onclick="start(document.getElementById('element').value)">Add element to Linked List</button>
+<button type="submit" style="background-color:mistyrose" value="Remove element from linkedlist" onclick="remove(document.getElementById('element').value)">Remove element from Linked List</button><br>
+<canvas id="canvas"></canvas>
+<script>
+	
+var inc=0;
+var Shape=Shape || {
+	x:0,
+	y:0,
+	w:0,
+	h:0,
+	t:0,
+	rects:[],
+	create:function(){
+		var obj=Object.create(this);
+		return obj;
+	},
+	add:function(x,y,w,h,t){
+		this.x=x;
+		this.y=y;
+		this.w=w;
+		this.h=h;
+		this.t=t;
+		this.rects.push({x,y,w,h,t});
+	},
+	remove:function(x,y,w,h,t){
+	    console.log(t);
+		for (var i=0;i<this.rects.length;i++) {
+		console.log(this.rects[i].t);
+		if(this.rects[i].t==t)
+		{
+		console.log(i);
+		this.rects.splice(i,1);
+		}
+		}
+	},
+	draw:function(context,text){
+	    inc=0
+		for (var i=0;i<this.rects.length-1;i++) {
+        oRec = this.rects[i];
+        console.log(oRec);
+        context.fillStyle = 'navy'
+		//console.log(oRec.x);
+        context.fillRect(oRec.x+inc, oRec.y, oRec.w, oRec.h);
+		context.fillStyle = 'white'
+		context.font = "20px Verdana";
+   		context.fillText(oRec.t, oRec.x+10+inc,oRec.y+50);
+		
+        context.beginPath();
+	     //context.moveTo(oRec.x+oRec.w/2,oRec.y+oRec.h/2);
+	     //context.lineTo(oRec.x+100,oRec.y+40);
+	      context.stroke();
+	      context.closePath();
+		  inc+=50;
+    
+
+    }
+	
+	oRec = this.rects[this.rects.length-1];
+        context.fillStyle = 'navy'
+		console.log(oRec.x);
+        context.fillRect(oRec.x+inc, oRec.y, oRec.w, oRec.h);
+		context.fillStyle = 'white'
+		context.font = "20px Verdana";
+   		context.fillText(oRec.t, oRec.x+10+inc,oRec.y+50);
+		
+        context.beginPath();
+	     
+	      context.stroke();
+	      context.closePath();
+	
+	}
+
+};
+function start(elmnt,x){
+if(elmnt!="")
+{
+	  var canvas=document.getElementById("canvas");
+	  canvas.height= 500;
+	  canvas.weight=400;
+	  canvas.style.width  = '600px';
+      canvas.style.height = '400px';
+	  var ctx=canvas.getContext("2d");
+	  var node=Shape.create();
+	  node.add(10, 100, 80, 80,elmnt)
+	  node.draw(ctx);
+	 
+}	  
+};
+function remove(elmnt)
+{
+ var canvas=document.getElementById("canvas");
+	  canvas.height= 500;
+	  canvas.weight=400;
+	  canvas.style.width  = '600px';
+      canvas.style.height = '400px';
+	  var ctx=canvas.getContext("2d");
+	  var node=Shape.create();
+	  ctx.clearRect(10,100,80,80,elmnt);
+	  console.log(elmnt);
+	  node.remove(10,100,80,80,elmnt);
+	  node.draw(ctx);
+}
+
+window.onload=function(){
+	  var canvas=document.getElementById("canvas");
+	  canvas.style.width  = '600px';
+      canvas.style.height = '400px';
+	  var ctx=canvas.getContext("2d");
+	  }
+
+
+</script>
+</center>
+
+
+</body>
+</html>
